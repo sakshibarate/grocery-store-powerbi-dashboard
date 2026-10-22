@@ -1,0 +1,36 @@
+-- Create these measures in Power BI: Modeling > New measure
+Total Sales = SUM(SalesData[SalesAmount])
+
+Total Profit = SUM(SalesData[Profit])
+
+Total Orders = DISTINCTCOUNT(SalesData[OrderID])
+
+Units Sold = SUM(SalesData[Quantity])
+
+Profit Margin % = DIVIDE([Total Profit], [Total Sales], 0)
+
+Average Order Value = DIVIDE([Total Sales], [Total Orders], 0)
+
+Average Discount % = AVERAGE(SalesData[DiscountPct])
+
+Sales Previous Month =
+CALCULATE(
+    [Total Sales],
+    DATEADD('Calendar'[Date], -1, MONTH)
+)
+
+Sales MoM Change % =
+DIVIDE([Total Sales] - [Sales Previous Month], [Sales Previous Month], 0)
+
+-- Calendar table: Modeling > New table
+Calendar =
+ADDCOLUMNS(
+    CALENDAR(MIN(SalesData[OrderDate]), MAX(SalesData[OrderDate])),
+    "Year", YEAR([Date]),
+    "Month", FORMAT([Date], "MMM"),
+    "Month Number", MONTH([Date]),
+    "Year-Month", FORMAT([Date], "YYYY-MM")
+)
+
+-- After creating Calendar, select Calendar[Month] > Sort by column > Month Number.
+-- Create relationship: Calendar[Date] (one) -> SalesData[OrderDate] (many).

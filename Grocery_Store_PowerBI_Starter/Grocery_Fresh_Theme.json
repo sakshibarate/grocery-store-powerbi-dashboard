@@ -1,0 +1,15 @@
+{
+  "name": "Grocery Fresh",
+  "dataColors": [
+    "#2E7D32",
+    "#F9A825",
+    "#1565C0",
+    "#EF6C00",
+    "#6A1B9A",
+    "#00838F",
+    "#C62828"
+  ],
+  "background": "#FFFFFF",
+  "foreground": "#263238",
+  "tableAccent": "#2E7D32"
+}
